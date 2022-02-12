@@ -200,12 +200,10 @@ namespace MkvToolnixAutomation
             {
                 prgTotal.Maximum = mkvDic.Count;
                 int current = 0;
-                TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
-                TaskbarItemInfo.ProgressValue = 0;
                 foreach (var item in mkvDic)
                 {
                     current++;
-                    prgTotal.Value = TaskbarItemInfo.ProgressValue = current;
+                    prgTotal.Value = current;
                     var template = await File.ReadAllTextAsync(txtMkvToolnixOptionFile.Text);
                     template = template.Replace("{XOUTNUMBERX}", item.Key.ToString("000"));
                     template = template.Replace("{XFILENAMEX}", item.Value);
@@ -221,7 +219,6 @@ namespace MkvToolnixAutomation
             catch (Exception ex)
             {
                 MessageBox.Error(ex.Message);
-                TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
             }
         }
         private async void btnMergeMkv_Click(object sender, RoutedEventArgs e)
@@ -231,12 +228,10 @@ namespace MkvToolnixAutomation
                 var jsons = Directory.GetFiles(JSON_PATH);
                 prgMerge.Maximum = jsons.Length;
                 int current = 0;
-                TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
-                TaskbarItemInfo.ProgressValue = 0;
                 foreach (var json in jsons)
                 {
                     current++;
-                    prgMerge.Value = TaskbarItemInfo.ProgressValue = current;
+                    prgMerge.Value = current;
                     var item = new FileInfo(json);
                     var result = await Cli.Wrap(txtMkvToolnixLocation.Text)
                         .WithArguments(@$"@{item.FullName}")
@@ -246,7 +241,6 @@ namespace MkvToolnixAutomation
             catch (Exception ex)
             {
                 MessageBox.Error(ex.Message);
-                TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
             }
         }
     }
