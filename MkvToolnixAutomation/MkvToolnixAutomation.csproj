@@ -6,11 +6,11 @@
 	<UseWindowsForms>true</UseWindowsForms>
 	<AssemblyName>MkvToolnixAutomation</AssemblyName>
     <RootNamespace>MkvToolnixAutomation</RootNamespace>
-    <Version>1.0.0.0</Version>
+    <Version>1.5.0.0</Version>
     <Configurations>Debug;Release</Configurations>
     <Copyright>Copyright © Sahar 2022</Copyright>
-    <FileVersion>1.0.0.0</FileVersion>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
     <LangVersion>latest</LangVersion>
 	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
 

@@ -19,6 +19,8 @@ namespace MkvToolnixAutomation
 
         Dictionary<int, string> mkvDic = new Dictionary<int, string>();
         Dictionary<int, string> subDic = new Dictionary<int, string>();
+        Dictionary<int, string> subDic2 = new Dictionary<int, string>();
+        Dictionary<int, string> subDic3 = new Dictionary<int, string>();
 
         public MainWindow()
         {
@@ -144,6 +146,33 @@ namespace MkvToolnixAutomation
             }
         }
 
+        private void btnSubtitlesFolderSecond_Click(object sender, RoutedEventArgs e)
+        {
+            using var dialog = new FolderBrowserDialog
+            {
+                Description = "Select Subtitles Folder",
+                UseDescriptionForTitle = true
+            };
+
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                txtSubtitlesFolderSecond.Text = dialog.SelectedPath;
+            }
+        }
+
+        private void btnSubtitlesFolderThird_Click(object sender, RoutedEventArgs e)
+        {
+            using var dialog = new FolderBrowserDialog
+            {
+                Description = "Select Subtitles Folder",
+                UseDescriptionForTitle = true
+            };
+
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                txtSubtitlesFolderThird.Text = dialog.SelectedPath;
+            }
+        }
         #endregion
 
         #region Get Anime and Subtitles
@@ -155,11 +184,42 @@ namespace MkvToolnixAutomation
                 return;
             }
             var subs = Directory.GetFiles(txtSubtitlesFolder.Text);
-            foreach (var item in subs)
+            if (subs != null)
             {
-                var info = new FileInfo(item).Name;
-                var key = Convert.ToInt32(RemoveSpecialWords(info));
-                subDic.Add(key, info);
+                foreach (var item in subs)
+                {
+                    var info = new FileInfo(item).Name;
+                    var key = Convert.ToInt32(RemoveSpecialWords(info));
+                    subDic.Add(key, info);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(txtSubtitlesFolderSecond.Text))
+            {
+                var subs2 = Directory.GetFiles(txtSubtitlesFolderSecond.Text);
+                if (subs2 != null)
+                {
+                    foreach (var item in subs2)
+                    {
+                        var info = new FileInfo(item).Name;
+                        var key = Convert.ToInt32(RemoveSpecialWords(info));
+                        subDic2.Add(key, info);
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(txtSubtitlesFolderThird.Text))
+            {
+                var subs3 = Directory.GetFiles(txtSubtitlesFolderThird.Text);
+                if (subs3 != null)
+                {
+                    foreach (var item in subs3)
+                    {
+                        var info = new FileInfo(item).Name;
+                        var key = Convert.ToInt32(RemoveSpecialWords(info));
+                        subDic3.Add(key, info);
+                    }
+                }
             }
         }
 
@@ -208,8 +268,12 @@ namespace MkvToolnixAutomation
                     template = template.Replace("{XOUTNUMBERX}", item.Key.ToString("000"));
                     template = template.Replace("{XFILENAMEX}", item.Value);
                     var subName = subDic.Where(x => x.Key == item.Key).FirstOrDefault().Value;
+                    var subName2 = subDic2.Where(x => x.Key == item.Key).FirstOrDefault().Value;
+                    var subName3 = subDic3.Where(x => x.Key == item.Key).FirstOrDefault().Value;
 
                     template = template.Replace("{XSUBFILENAMEX}", subName);
+                    template = template.Replace("{XSUBFILENAME2X}", subName2);
+                    template = template.Replace("{XSUBFILENAME3X}", subName3);
 
                     await File.WriteAllTextAsync(@$"{JSON_PATH}\{item.Key}.json", template);
                 }
@@ -243,5 +307,7 @@ namespace MkvToolnixAutomation
                 MessageBox.Error(ex.Message);
             }
         }
+
+        
     }
 }

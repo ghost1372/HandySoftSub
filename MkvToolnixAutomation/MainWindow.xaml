@@ -29,23 +29,29 @@
                     <Button Content="Load MkvToolnix Option file (Json-formatted)" Name="btnLoadConfig" Click="btnLoadOptionFile_Click"/>
                     <hc:TextBox hc:InfoElement.Placeholder="MkvToolnix Option File" IsReadOnly="True" Name="txtMkvToolnixOptionFile"/>
 
-                    <Button Content="Select Anime Folder" Name="btnAnimeFolder" Click="btnAnimeFolder_Click"/>
-                    <hc:TextBox hc:InfoElement.Placeholder="Anime Folder" IsReadOnly="True" Name="txtAnimeFolder"/>
-                    <Button Content="Select Subtitles Folder" Name="btnSubtitlesFolder" Click="btnSubtitlesFolder_Click"/>
-                    <hc:TextBox hc:InfoElement.Placeholder="Subtitles Folder" Name="txtSubtitlesFolder"/>
+                    <Button Content="Select Anime/Series Folder" Name="btnAnimeFolder" Click="btnAnimeFolder_Click"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Anime/Series Folder" IsReadOnly="True" Name="txtAnimeFolder"/>
+                    <Button Content="Select First Subtitles Folder" Name="btnSubtitlesFolder" Click="btnSubtitlesFolder_Click"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="First Subtitles Folder" Name="txtSubtitlesFolder"/>
+
+                    <Button Content="Select Second Subtitles Folder" Name="btnSubtitlesFolderSecond" Click="btnSubtitlesFolderSecond_Click"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Second Subtitles Folder" Name="txtSubtitlesFolderSecond"/>
+
+                    <Button Content="Select Third Subtitles Folder" Name="btnSubtitlesFolderThird" Click="btnSubtitlesFolderThird_Click"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Third Subtitles Folder" Name="txtSubtitlesFolderThird"/>
                 </hc:UniformSpacingPanel>
             </hc:ScrollViewer>
         </GroupBox>
-        <GroupBox Grid.Column="1" Margin="10" Header="SoftSub Anime">
+        <GroupBox Grid.Column="1" Margin="10" Header="SoftSub Anime/Series">
             <hc:ScrollViewer>
                 <hc:UniformSpacingPanel Spacing="10" Orientation="Vertical">
-                    <Button x:Name="btnGetAnimeSubList" Click="btnGetAnimeSubList_Click" Content="Get Anime and Subtitles"/>
+                    <Button x:Name="btnGetAnimeSubList" Click="btnGetAnimeSubList_Click" Content="Get Anime/Series and Subtitles"/>
                     <Border Style="{StaticResource BorderTipInfo}">
                         <TextBlock x:Name="txtStatus" Text="Status:" TextWrapping="Wrap"/>
                     </Border>
                     <Button x:Name="btnGenerateJson" IsEnabled="False" Click="btnGenerateJson_Click" Content="Generate Json Configs for All Episodes" Style="{StaticResource ButtonPrimary}"/>
                     <ProgressBar x:Name="prgTotal" Value="0" Style="{StaticResource ProgressBarSuccess}"/>
-                    <Button x:Name="btnMergeMkv" Click="btnMergeMkv_Click" IsEnabled="False" Content="Merge Subtitle with Anime" Style="{StaticResource ButtonPrimary}"/>
+                    <Button x:Name="btnMergeMkv" Click="btnMergeMkv_Click" IsEnabled="False" Content="Merge Subtitle with Anime/Series" Style="{StaticResource ButtonPrimary}"/>
                     <ProgressBar x:Name="prgMerge" Value="0" Style="{StaticResource ProgressBarSuccess}"/>
 
                 </hc:UniformSpacingPanel>
